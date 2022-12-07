@@ -97,6 +97,16 @@
             ],
             "scripts": []
           }
+        },
+        "deploy": {
+          "builder": "@angular/fire:deploy",
+          "options": {
+            "prerender": false,
+            "ssr": false,
+            "browserTarget": "tv-show-app:build:production",
+            "firebaseProject": "tv-shows-app-31965",
+            "firebaseHostingSite": "tv-shows-app-31965"
+          }
         }
       }
     }

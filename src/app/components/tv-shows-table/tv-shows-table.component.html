@@ -1,0 +1,12 @@
+<table class="m-0 table table-dark table-striped table-bordered table-hover">
+  <thead>
+  <tr>
+    <th>Id</th>
+    <th>Show title</th>
+    <th>Options</th>
+  </tr>
+  </thead>
+  <tbody *ngFor="let tvShow of tvShows">
+    <tr class="table-dark" my-tr [tvShow]=tvShow></tr>
+  </tbody>
+</table>

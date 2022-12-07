@@ -1,13 +1,13 @@
 import { Component } from '@angular/core';
-import {TvShows} from "../model/TvShow";
-import {TvShowsService} from "../tv-shows.service";
+import {DetailedTvShows, TvShows} from "../../model/DetailedTvShow";
+import {TvShowsService} from "../../service/domain/tv-shows.service";
 
 @Component({
   selector: 'app-tv-shows-list',
-  templateUrl: './tv-shows-list.component.html',
-  styleUrls: ['./tv-shows-list.component.scss']
+  templateUrl: './tv-shows-table.component.html',
+  styleUrls: ['./tv-shows-table.component.scss']
 })
-export class TvShowsListComponent {
+export class TvShowsTableComponent {
 
   tvShows: TvShows = [];
 

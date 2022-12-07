@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import {Component, Input} from '@angular/core';
+import {DetailedTvShow} from "../../model/DetailedTvShow";
 
 @Component({
   selector: 'app-detailed-show-view',
@@ -6,5 +7,5 @@ import { Component } from '@angular/core';
   styleUrls: ['./detailed-show-view.component.scss']
 })
 export class DetailedShowViewComponent {
-
+  @Input() tvShow!: DetailedTvShow;
 }

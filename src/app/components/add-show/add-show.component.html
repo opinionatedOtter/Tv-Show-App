@@ -1,6 +1,6 @@
-<div class="container">
+<div class="container p-0 m-0">
   <h2>Add tv show</h2>
-  <form (ngSubmit)="onSubmit()" #addShowForm="ngForm">
+  <form (ngSubmit)="onSubmit(); addShowForm.resetForm()" #addShowForm="ngForm">
     <div class="form-group">
       <label for="id">Id</label>
       <input type="number" class="form-control" id="id"
