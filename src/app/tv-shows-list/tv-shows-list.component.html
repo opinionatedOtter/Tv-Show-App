@@ -1,0 +1,11 @@
+<div>Shows</div>
+<table>
+  <tr>
+    <th>Id</th>
+    <th>Show title</th>
+    <th>Options</th>
+  </tr>
+    <ng-container *ngFor="let tvShow of tvShows">
+      <tr my-tr [tvShow] = tvShow></tr>
+    </ng-container>
+</table>
