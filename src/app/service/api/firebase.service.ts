@@ -1,7 +1,8 @@
 import {Injectable} from '@angular/core';
-import {AngularFirestore} from "@angular/fire/compat/firestore";
+import {AngularFirestore, DocumentData} from "@angular/fire/compat/firestore";
 import {Observable} from "rxjs";
 import {DocumentReference} from "@angular/fire/compat/firestore/interfaces";
+import {doc, setDoc} from "@angular/fire/firestore";
 
 @Injectable({
   providedIn: 'root'
@@ -17,6 +18,14 @@ export class FirebaseService {
 
   saveInCollection<T>(collection: string, entity: T): Promise<DocumentReference<T>> {
     return this.store.collection<T>(collection).add(Object.assign({}, entity));
+  }
+
+
+  update<T>(collection: string, uid: string, newState: DocumentData): Promise<void> {
+   return setDoc(
+      doc(this.store.firestore, collection, uid),
+      newState
+    )
   }
 
   deleteInCollection(collection: string, uid: string): Promise<void> {

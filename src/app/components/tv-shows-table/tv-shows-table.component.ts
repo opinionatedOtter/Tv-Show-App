@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import {DetailedTvShows, TvShows} from "../../model/DetailedTvShow";
+import {Component} from '@angular/core';
+import {DetailedTvShow, DetailedTvShows, TvShow, TvShows} from "../../model/DetailedTvShow";
 import {TvShowsService} from "../../service/domain/tv-shows.service";
 
 @Component({
@@ -10,8 +10,10 @@ import {TvShowsService} from "../../service/domain/tv-shows.service";
 export class TvShowsTableComponent {
 
   tvShows: TvShows = [];
+  detailedShow?: DetailedTvShow;
 
-  constructor(private tvShowsService: TvShowsService) { }
+  constructor(private tvShowsService: TvShowsService) {
+  }
 
   ngOnInit(): void {
     this.getShows();
@@ -19,10 +21,15 @@ export class TvShowsTableComponent {
 
   getShows(): void {
     this.tvShowsService.getTvShows()
-      .subscribe(shows =>{
-        console.log(shows);
+      .subscribe(shows => {
         this.tvShows = shows
       });
+  }
+
+  showDetailedView(uid: string): void {
+    this.tvShowsService.getDetailedView(this.tvShows.find(s => s.uid === uid)!)
+      .then(r => this.detailedShow = r)
+      .catch(e => console.log(e))
   }
 
 }

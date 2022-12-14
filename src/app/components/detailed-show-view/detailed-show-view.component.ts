@@ -7,5 +7,5 @@ import {DetailedTvShow} from "../../model/DetailedTvShow";
   styleUrls: ['./detailed-show-view.component.scss']
 })
 export class DetailedShowViewComponent {
-  @Input() tvShow!: DetailedTvShow;
+  @Input() detailedShow!: DetailedTvShow;
 }

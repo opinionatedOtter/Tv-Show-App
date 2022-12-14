@@ -1,7 +1,7 @@
 <div class="card">
-  <img class="card-img-top" style="width: 18rem;" [src]=tvShow.image>
+  <img class="card-img-top" style="width: 18rem;" [src]=detailedShow.image.medium alt="movie picture">
   <div class="card-body">
-    <h4 class="card-title">{{tvShow.name}}</h4>
-    <p class="card-text">{{tvShow.summary}}</p>
+    <h4 class="card-title">{{detailedShow.name}}</h4>
+    <p class="card-text" [innerHTML]="detailedShow.summary"></p>
   </div>
 </div>

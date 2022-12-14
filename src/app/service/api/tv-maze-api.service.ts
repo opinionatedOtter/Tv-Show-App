@@ -1,6 +1,6 @@
-import { Injectable } from '@angular/core';
-import {DetailedTvShow, DetailedTvShows} from "../../model/DetailedTvShow";
-import {catchError, map, Observable, of} from "rxjs";
+import {Injectable} from '@angular/core';
+import {DetailedTvShow, TvShow} from "../../model/DetailedTvShow";
+import {catchError, EMPTY} from "rxjs";
 import {HttpClient} from "@angular/common/http";
 
 @Injectable({
@@ -8,18 +8,43 @@ import {HttpClient} from "@angular/common/http";
 })
 export class TvMazeApiService {
 
-  private showApi = "https://api.tvmaze.com/singlesearch/shows?q=girls";
+  private showApi = "https://api.tvmaze.com/shows/";
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {
+  }
 
-  x(){
-    return this.http.get<DetailedTvShow>(this.showApi)
-      .pipe(
-        catchError((e): Observable<DetailedTvShows> => {
-          console.log(e);
-          return of([]);
-        }),
-        map(s => Array.of(s) as DetailedTvShows)
-      );
+  showIsValid(name: string, id: number): Promise<DetailedTvShow | undefined> {
+    return new Promise<DetailedTvShow | undefined>((resolve, reject) => {
+      this.http.get<DetailedTvShow>(this.showApi + id)
+        .pipe(catchError(err => {
+              console.log(err)
+              reject(err);
+              return EMPTY;
+            }
+          ),
+        ).subscribe(data => {
+        resolve(this.validateName(data, name) ? data : undefined)
+      });
+    })
+  }
+
+  private validateName(data: DetailedTvShow, name: string) {
+    return data.name.trim().toLowerCase() === name.trim().toLowerCase();
+  }
+
+  getDetailedShow(show: TvShow): Promise<DetailedTvShow> {
+    return new Promise<DetailedTvShow>((resolve, reject) => {
+      this.http.get<DetailedTvShow>(this.showApi + show.id)
+        .pipe(
+          catchError(err => {
+              console.log(err)
+              reject(err);
+              return EMPTY;
+            }
+          ),
+        ).subscribe(data => {
+        resolve(data)
+      });
+    })
   }
 }
