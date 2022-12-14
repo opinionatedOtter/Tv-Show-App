@@ -26,10 +26,13 @@ export class TvShowsTableComponent {
       });
   }
 
-  showDetailedView(uid: string): void {
-    this.tvShowsService.getDetailedView(this.tvShows.find(s => s.uid === uid)!)
-      .then(r => this.detailedShow = r)
-      .catch(e => console.log(e))
-  }
-
+  showDetailedView(uid: string | undefined): void {
+    if (!uid){
+      this.detailedShow = undefined;
+    }else {
+      this.tvShowsService.getDetailedView(this.tvShows.find(s => s.uid === uid)!)
+        .then(r => this.detailedShow = r)
+        .catch(e => console.log(e))
+    }
+    }
 }

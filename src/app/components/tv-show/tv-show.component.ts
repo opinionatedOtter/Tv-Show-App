@@ -43,6 +43,7 @@ export class TvShowComponent {
   }
 
   deleteShow(): void {
+    this.doubleClickEvt.emit(undefined);
     this.tvShowService.deleteTvShow(this.tvShow.uid)
       .then(() => console.log("deleted"))
       .catch(e => console.log(e))
