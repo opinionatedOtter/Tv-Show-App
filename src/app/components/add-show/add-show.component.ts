@@ -13,10 +13,21 @@ export class AddShowComponent {
   }
 
   model = new AddShowDto();
+  alert = false;
 
   onSubmit() {
     this.showsService.addTvShow(this.model)
-      .then(() => this.model = new AddShowDto())
-      .catch(e => console.log(e))
+      .then(() => {
+        this.model = new AddShowDto();
+        this.alert = false;
+      })
+      .catch(e => {
+        this.alert = true;
+        console.log(e)
+      })
+  }
+
+  closeAlter() {
+    this.alert = false;
   }
 }

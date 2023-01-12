@@ -1,5 +1,6 @@
 <div class="container p-0 m-0">
   <h2>Add tv show</h2>
+  <ngb-alert *ngIf="alert" type="warning" (closed)="closeAlter()">No show with this id and name found</ngb-alert>
   <form (ngSubmit)="onSubmit(); addShowForm.resetForm()" #addShowForm="ngForm">
     <div class="form-group">
       <label for="id">Id</label>

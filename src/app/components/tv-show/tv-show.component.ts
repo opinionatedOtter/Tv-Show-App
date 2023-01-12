@@ -1,6 +1,7 @@
 import {Component, EventEmitter, HostListener, Input, Output} from '@angular/core';
 import {DetailedTvShow, TvShow} from "../../model/DetailedTvShow";
 import {TvShowsService} from "../../service/domain/tv-shows.service";
+import {ToastService} from "../../service/rendering/toast.service";
 
 @Component({
   selector: '[my-tr]',
@@ -22,7 +23,7 @@ export class TvShowComponent {
     name: ""
   };
 
-  constructor(private tvShowService: TvShowsService) {
+  constructor(private tvShowService: TvShowsService, private toastService: ToastService) {
   }
 
   ngOnInit() {
@@ -43,6 +44,7 @@ export class TvShowComponent {
   }
 
   deleteShow(): void {
+    this.toastService.toastIt("Deleted show "+ this.tvShow.name, "danger")
     this.doubleClickEvt.emit(undefined);
     this.tvShowService.deleteTvShow(this.tvShow.uid)
       .then(() => console.log("deleted"))

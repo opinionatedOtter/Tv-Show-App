@@ -4,6 +4,7 @@ import {DetailedTvShow, TvShow, TvShows} from "../../model/DetailedTvShow";
 import {FirebaseService} from "../api/firebase.service";
 import {TvMazeApiService} from "../api/tv-maze-api.service";
 import {AddShowDto} from "../../model/addShowDto";
+import {ToastService} from "../rendering/toast.service";
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +13,7 @@ export class TvShowsService {
 
   collection = "table_tv_show"
 
-  constructor(private showApi: TvMazeApiService, private repo: FirebaseService) {
+  constructor(private showApi: TvMazeApiService, private repo: FirebaseService, private toastService: ToastService) {
   }
 
   getTvShows(): Observable<TvShows> {
@@ -20,13 +21,17 @@ export class TvShowsService {
   }
 
   addTvShow(show: AddShowDto): Promise<AddShowDto> {
-    return new Promise<AddShowDto>((resolve, reject) => {
+    return new Promise<AddShowDto>(
+      (resolve, reject) => {
       this.showApi.showIsValid(show.name || "", show.id || 1)
         .then(show =>{
           if(show){
             this.repo.saveInCollection(this.collection, show)
               .then(refData => resolve(show))
               .catch(e => reject(e))
+          } else {
+            reject("no show with this id and name")
+            this.toastService.toastIt("Could not add show: no show with this id and name", "danger")
           }
           }
         )

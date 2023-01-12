@@ -1,0 +1,9 @@
+<ngb-toast
+  *ngFor="let toast of toasts"
+  [class]="'bg-'+toast.color+ ' text-light'"
+  [autohide]= true
+  [delay]="5000"
+  (hidden)="remove()"
+>
+  <h5>{{toast.text}}</h5>
+</ngb-toast>

@@ -14,6 +14,7 @@ import {DetailedShowViewComponent} from './components/detailed-show-view/detaile
 import {environment} from '../environments/environment';
 import {AngularFireModule} from "@angular/fire/compat";
 import {AngularFireDatabaseModule} from "@angular/fire/compat/database";
+import { ToastComponent } from './components/toast/toast.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import {AngularFireDatabaseModule} from "@angular/fire/compat/database";
     TvShowsTableComponent,
     TvShowComponent,
     AddShowComponent,
-    DetailedShowViewComponent
+    DetailedShowViewComponent,
+    ToastComponent
   ],
   imports: [
     BrowserModule,
